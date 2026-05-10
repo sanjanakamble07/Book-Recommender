@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Book Recommendation System</title>
+
+<style>
+    *{
+        margin:0;
+        padding:0;
+        box-sizing:border-box;
+        font-family: Arial, sans-serif;
+    }
+
+    body{
+        background: linear-gradient(to right, #dfe9f3, #ffffff);
+        min-height:100vh;
+        display:flex;
+        justify-content:center;
+        align-items:center;
+    }
+
+    .container{
+        width:400px;
+        background:white;
+        padding:30px;
+        border-radius:15px;
+        box-shadow:0 5px 15px rgba(0,0,0,0.2);
+        text-align:center;
+    }
+
+    h1{
+        margin-bottom:20px;
+        color:#333;
+    }
+
+    select, button{
+        width:100%;
+        padding:12px;
+        margin-top:15px;
+        border-radius:8px;
+        border:none;
+        font-size:16px;
+    }
+
+    select{
+        background:#f0f0f0;
+    }
+
+    button{
+        background:#4a90e2;
+        color:white;
+        cursor:pointer;
+        transition:0.3s;
+    }
+
+    button:hover{
+        background:#357abd;
+    }
+
+    .result{
+        margin-top:25px;
+        padding:15px;
+        background:#f7f7f7;
+        border-radius:10px;
+        display:none;
+    }
+
+    .book{
+        margin-top:10px;
+        padding:10px;
+        background:white;
+        border-radius:8px;
+        box-shadow:0 2px 5px rgba(0,0,0,0.1);
+    }
+</style>
+</head>
+
+<body>
+
+<div class="container">
+    <h1>📚 Book Recommendation</h1>
+
+    <select id="genre">
+        <option value="">Select Genre</option>
+        <option value="fiction">Fiction</option>
+        <option value="mystery">Mystery</option>
+        <option value="fantasy">Fantasy</option>
+        <option value="romance">Romance</option>
+    </select>
+
+    <button onclick="recommendBooks()">Get Recommendations</button>
+
+    <div class="result" id="result">
+        <h2>Recommended Books</h2>
+        <div id="books"></div>
+    </div>
+</div>
+
+<script>
+    const recommendations = {
+        fiction: [
+            "To Kill a Mockingbird",
+            "The Great Gatsby",
+            "1984"
+        ],
+        mystery: [
+            "Sherlock Holmes",
+            "Gone Girl",
+            "The Silent Patient"
+        ],
+        fantasy: [
+            "Harry Potter",
+            "The Hobbit",
+            "Percy Jackson"
+        ],
+        romance: [
+            "Pride and Prejudice",
+            "Me Before You",
+            "The Notebook"
+        ]
+    };
+
+    function recommendBooks() {
+        const genre = document.getElementById("genre").value;
+        const resultDiv = document.getElementById("result");
+        const booksDiv = document.getElementById("books");
+
+        booksDiv.innerHTML = "";
+
+        if (genre === "") {
+            alert("Please select a genre!");
+            return;
+        }
+
+        recommendations[genre].forEach(book => {
+            const bookElement = document.createElement("div");
+            bookElement.classList.add("book");
+            bookElement.innerHTML = "📖 " + book;
+            booksDiv.appendChild(bookElement);
+        });
+
+        resultDiv.style.display = "block";
+    }
+</script>
+
+</body>
+</html>
